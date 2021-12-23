@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const TaskModel = new mongoose.Schema({
   data: {
     type: String,
@@ -10,9 +11,7 @@ const TaskModel = new mongoose.Schema({
     required: true,
     default: 1,
   },
-  createdBy :
-   { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
-
+  createdBy: { type: Object },
 });
 
 module.exports = mongoose.model("TaskModel", TaskModel);

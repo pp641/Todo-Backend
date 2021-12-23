@@ -1,5 +1,6 @@
 const TaskModel = require("../models/todoTask");
 const nodemailer = require("nodemailer");
+const User = require("../../auth/models/model");
 
 let fromMail = "prajjwalpandey641@gmail.com";
 let toMail = fromMail;
@@ -31,17 +32,15 @@ const sendMail = () => {
 };
 
 exports.createTask = async (req, res) => {
-  console.log(req.body);
   const NewTask = new TaskModel({
     data: req.body.data.data,
     currentState: req.body.data.currentState,
+    createdBy: req.user,
   });
   await NewTask.save(function (err, result) {
     if (err) {
       res.send(err);
     } else {
-      // console.log(result);
-      sendMail();
       res.send(result);
     }
   });

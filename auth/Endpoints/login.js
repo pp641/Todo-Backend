@@ -5,7 +5,7 @@ const User = require("../models/model");
 const keys = require("../keys");
 
 exports.login = (req, res) => {
-  req.body =  req.body.data
+  req.body = req.body.data;
   const { errors, isValid } = validateLoginInput(req.body);
   if (!isValid) {
     return res.status(400).json(errors);
@@ -22,7 +22,6 @@ exports.login = (req, res) => {
           id: user.id,
           name: user.name,
         };
-        req.user = payload;
         jwt.sign(
           payload,
           keys.secretOrKey,
@@ -33,13 +32,12 @@ exports.login = (req, res) => {
             res.json({
               success: true,
               token: "Bearer " + token,
+              payload: payload,
             });
           }
         );
       } else {
-        return res
-          .status(400)
-          .json({ passwordincorrect: "Password incorrect" });
+        return res.json({ passwordincorrect: "Password incorrect" });
       }
     });
   });
