@@ -10,6 +10,9 @@ const TaskModel = new mongoose.Schema({
     required: true,
     default: 1,
   },
+  createdBy :
+   { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+
 });
 
-module.exports = mongoose.model("TaskMode", TaskModel);
+module.exports = mongoose.model("TaskModel", TaskModel);

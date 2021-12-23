@@ -7,11 +7,13 @@ const {
   updateTask,
   deleteTask,
 } = require("../controllers/TaskFunctions");
-
+const isLogin = require("../auth/middlwares/isLogin")
 const middle = (req, res, next) => {
   res.setHeader("charset", "utf-8");
   next();
 };
+
+
 
 router.get("/getTodo", getTask);
 router.get("/getTodoAll", getAllTasks);

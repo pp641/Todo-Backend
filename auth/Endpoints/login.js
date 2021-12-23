@@ -1,10 +1,11 @@
-const jwt = require("jwt");
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const router = require("express").Router();
 const validateLoginInput = require("../controllers/login");
 const User = require("../models/model");
 const keys = require("../keys");
-router.post("/login", (req, res) => {
+
+exports.login = (req, res) => {
+  req.body =  req.body.data
   const { errors, isValid } = validateLoginInput(req.body);
   if (!isValid) {
     return res.status(400).json(errors);
@@ -21,6 +22,7 @@ router.post("/login", (req, res) => {
           id: user.id,
           name: user.name,
         };
+        req.user = payload;
         jwt.sign(
           payload,
           keys.secretOrKey,
@@ -41,6 +43,4 @@ router.post("/login", (req, res) => {
       }
     });
   });
-});
-
-module.exports = router;
+};

@@ -1,7 +1,6 @@
 const TaskModel = require("../models/todoTask");
 const nodemailer = require("nodemailer");
 
-// / declare vars,
 let fromMail = "prajjwalpandey641@gmail.com";
 let toMail = fromMail;
 let subject = "Enter subject line here";
@@ -88,7 +87,6 @@ exports.deleteTask = async (req, res) => {
 };
 
 exports.getAllTasks = async (req, res) => {
-  // console.log(req);
   await TaskModel.find({})
     .then((response) => {
       res.send(response);
