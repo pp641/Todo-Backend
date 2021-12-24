@@ -37,6 +37,7 @@ exports.createTask = async (req, res) => {
     currentState: req.body.data.currentState,
     createdBy: req.user,
   });
+  console.log(NewTask);
   await NewTask.save(function (err, result) {
     if (err) {
       res.send(err);
@@ -76,8 +77,9 @@ exports.updateTask = async (req, res) => {
 
 exports.deleteTask = async (req, res) => {
   console.log(req.body);
-  await TaskModel.deleteOne(req.body)
+  await TaskModel.deleteOne({ _id :  req.body.data})
     .then((response) => {
+      console.log(response)
       return res.send(response);
     })
     .catch((err) => {
