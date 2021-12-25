@@ -26,6 +26,7 @@ try {
 
 app.get("/ok", (req, res) => {
   console.log("getdone");
+  res.sendStatus(200);
 });
 app.use("/api", router);
 app.use("/api/users", routerAuth);
