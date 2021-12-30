@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.text());
 const router = require("./Task/routes/allTaskRoutes");
 const routerAuth = require("./auth/Routes/routes");
+const collaborationRoutes = require("./collaborator/routes/collaboratorRoutes");
 try {
   mongoose.connect(
     "mongodb://127.0.0.1:27017/todoDb",
@@ -29,5 +30,6 @@ app.get("/ok", (req, res) => {
 });
 app.use("/api", router);
 app.use("/api/users", routerAuth);
+app.use("/api/collaboration", collaborationRoutes);
 const port = 8000 || process.env.PORT;
 app.listen(port, () => console.log(`Connected to port ${port}`));
